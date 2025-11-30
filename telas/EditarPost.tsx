@@ -134,7 +134,7 @@ export default function Editar() {
             onChangeText={setAutor}
           />
 
-          <Text style={styles.label}>Conteúdo *</Text>
+          <Text style={styles.label}>Conteúdo</Text>
           <TextInput
             style={[styles.input, styles.textarea]}
             placeholder="Edite o conteúdo do post…"
