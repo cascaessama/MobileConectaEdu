@@ -124,16 +124,6 @@ export default function CadastrarUsuario() {
   return (
     <SafeAreaView style={styles.screen} edges={["top"]}>
       <View style={styles.appbar}>
-        <Pressable
-          style={styles.backBtn}
-          onPress={() => navigation.goBack()}
-        >
-          <MaterialIcons
-            name="arrow-back"
-            size={24}
-            color={PALETTE.primaryDark}
-          />
-        </Pressable>
         <View style={{ flex: 1 }}>
           <Text style={styles.appbarTitle}>Cadastrar Usuário</Text>
           <View style={styles.appbarAccent} />
@@ -177,19 +167,28 @@ export default function CadastrarUsuario() {
           </View>
         </View>
 
-        {error && <Text style={styles.error}>{error}</Text>}
+        {error && <Text style={styles.errorMsg}>{error}</Text>}
 
-        <Pressable
-          style={[styles.saveBtn, loading && { opacity: 0.7 }]}
-          onPress={handleSave}
-          disabled={loading}
-        >
-          {loading ? (
-            <ActivityIndicator color="#fff" />
-          ) : (
-            <Text style={styles.saveBtnText}>Salvar usuário</Text>
-          )}
-        </Pressable>
+        <View style={styles.actions}>
+          <Pressable
+            style={[styles.btn, styles.btnGhost]}
+            onPress={() => navigation.goBack()}
+            disabled={loading}
+          >
+            <Text style={[styles.btnText, styles.btnGhostText]}>Cancelar</Text>
+          </Pressable>
+          <Pressable
+            style={[styles.btn, styles.btnPrimary, loading && { opacity: 0.7 }]}
+            onPress={handleSave}
+            disabled={loading}
+          >
+            {loading ? (
+              <ActivityIndicator color="#fff" />
+            ) : (
+              <Text style={styles.btnText}>Salvar</Text>
+            )}
+          </Pressable>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -210,9 +209,7 @@ const styles = StyleSheet.create({
     borderBottomColor: PALETTE.border,
   },
   backBtn: {
-    marginRight: 8,
-    padding: 4,
-    borderRadius: 999,
+    // removido: header agora segue padrão de EditarPost sem botão
   },
   appbarTitle: {
     color: PALETTE.primaryDark,
@@ -285,23 +282,20 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
 
-  saveBtn: {
-    marginTop: 16,
-    backgroundColor: PALETTE.primary,
-    borderRadius: 999,
-    paddingVertical: 10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  saveBtnText: {
-    color: "#fff",
-    fontWeight: "700",
-    fontSize: 16,
-  },
+  actions: { flexDirection: "row", justifyContent: "flex-end", gap: 10, marginTop: 16 },
+  btn: { paddingVertical: 12, paddingHorizontal: 18, borderRadius: 10 },
+  btnGhost: { backgroundColor: "#fff", borderWidth: 1, borderColor: PALETTE.border },
+  btnGhostText: { color: PALETTE.ink },
+  btnPrimary: { backgroundColor: PALETTE.primary, borderRadius: 10 },
+  btnText: { color: "#fff", fontWeight: "700" },
 
-  error: {
-    marginTop: 4,
-    color: PALETTE.danger,
+  errorMsg: {
+    marginTop: 12,
+    padding: 8,
+    borderRadius: 8,
+    backgroundColor: "#FFE9E9",
+    color: "#A61B1B",
+    fontSize: 13,
     fontWeight: "700",
   },
 });

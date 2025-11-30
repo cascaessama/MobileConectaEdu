@@ -61,29 +61,53 @@ export default function ListarUsuarios() {
         setLoading(false);
         return;
       }
+      // Busca paginada: tenta agregar todas as páginas enquanto houver resultados
+      const aggregated: User[] = [];
+      let page = 1;
+      const limit = 100; // ajuste se necessário conforme API
+      while (true) {
+        const url = `${API_URL}/users?page=${page}&limit=${limit}`;
+        const response = await fetch(url, {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-      const response = await fetch(`${API_URL}/users`, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (!response.ok) {
-        let msg = "Falha ao buscar usuários.";
-        try {
-          const data = await response.json();
-          if (data?.message) msg = data.message;
-        } catch {
-          const text = await response.text();
-          if (text) msg = text;
+        if (!response.ok) {
+          let msg = "Falha ao buscar usuários.";
+          try {
+            const data = await response.json();
+            if (data?.message) msg = data.message;
+          } catch {
+            const text = await response.text();
+            if (text) msg = text;
+          }
+          throw new Error(msg);
         }
-        throw new Error(msg);
+
+        let pageData: any = [];
+        try {
+          pageData = await response.json();
+        } catch {
+          pageData = [];
+        }
+
+        const list: User[] = Array.isArray(pageData?.items)
+          ? pageData.items
+          : Array.isArray(pageData)
+          ? pageData
+          : [];
+
+        aggregated.push(...list);
+
+        // Verifica fim de paginação: sem itens ou menor que limit
+        if (list.length < limit) break;
+        page += 1;
+        // Proteção para evitar loop infinito
+        if (page > 100) break;
       }
 
-      const data = await response.json();
-      const arr = Array.isArray(data) ? data : [];
-
-      setItems(arr);
-      if (!arr.length) setError("Nenhum usuário encontrado.");
+      setItems(aggregated);
+      if (!aggregated.length) setError("Nenhum usuário encontrado.");
     } catch (e: any) {
       setItems([]);
       setError(e?.message ?? "Erro ao carregar usuários.");
@@ -437,8 +461,8 @@ const styles = StyleSheet.create({
 
   fab: {
     position: "absolute",
-    right: 20,
     bottom: 24,
+    alignSelf: "center",
     width: 56,
     height: 56,
     borderRadius: 28,

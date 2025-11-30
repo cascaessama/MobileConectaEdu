@@ -463,8 +463,8 @@ const styles = StyleSheet.create({
   /* FAB */
   fab: {
     position: "absolute",
-    right: 20,
     bottom: 24,
+    alignSelf: "center",
     width: 56,
     height: 56,
     borderRadius: 28,

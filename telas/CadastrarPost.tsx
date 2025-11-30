@@ -106,7 +106,7 @@ export default function CadastrarPost() {
     setError(null);
 
     if (!titulo.trim() || !conteudo.trim() || !autor.trim()) {
-      setError("Preencha título, conteúdo e nome do autor.");
+      setError("Preencha os campos título, autor e conteúdo.");
       return;
     }
 
@@ -178,7 +178,17 @@ export default function CadastrarPost() {
             textAlignVertical="top"
           />
 
-          {error ? <Text style={styles.errorMsg}>{error}</Text> : null}
+          {error ? (
+            <Text
+              style={[
+                styles.errorMsg,
+                (error === "Preencha os campos título, autor e conteúdo." ||
+                  error.includes("Preencha os campos título, autor e conteúdo")) && styles.errorBold,
+              ]}
+            >
+              {error}
+            </Text>
+          ) : null}
 
           <View style={styles.actions}>
             <Pressable
@@ -278,6 +288,7 @@ const styles = StyleSheet.create({
     color: "#A61B1B",
     fontSize: 13,
   },
+  errorBold: { fontWeight: "700" },
   actions: {
     flexDirection: "row",
     justifyContent: "flex-end",
