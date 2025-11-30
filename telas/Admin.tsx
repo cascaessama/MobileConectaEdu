@@ -158,9 +158,11 @@ export default function Admin() {
           style={styles.card}
           onPress={() => navigation.navigate("LerPost", { post: item })}
         >
-          {/* Cabeçalho do card */}
-          <View style={styles.cardHeader}>
-            {/* Ações (editar/excluir) */}
+          {/* Linha superior: título + ações */}
+          <View style={styles.cardTopRow}>
+            <Text style={styles.title} numberOfLines={2}>
+              {item.titulo || "Sem título"}
+            </Text>
             <View style={styles.actions}>
               <Pressable
                 onPress={() => navigation.navigate("EditarPost", { post: item })}
@@ -172,7 +174,6 @@ export default function Admin() {
                   color={PALETTE.primaryDark}
                 />
               </Pressable>
-
               <Pressable
                 onPress={() =>
                   navigation.navigate("ExcluirPost", {
@@ -191,8 +192,7 @@ export default function Admin() {
             </View>
           </View>
 
-          {/* Título e meta */}
-          <Text style={styles.title}>{item.titulo || "Sem título"}</Text>
+          {/* Meta */}
           <Text style={styles.meta}>
             {item.autor ? `${item.autor}` : "Autor desconhecido"}
             {item.dataCriacao ? ` • ${formatDate(item.dataCriacao)}` : ""}
@@ -421,10 +421,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3,
   },
-  cardHeader: {
+  cardTopRow: {
     flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 8,
+    alignItems: "flex-start",
+    gap: 8,
+    marginBottom: 6,
   },
   
   actions: {
@@ -440,10 +441,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   title: {
+    flex: 1,
     fontSize: 18,
     fontWeight: "800",
     color: PALETTE.ink,
-    marginTop: 2,
     marginBottom: 4,
   },
   meta: {
