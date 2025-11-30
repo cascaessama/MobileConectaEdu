@@ -106,6 +106,20 @@ export default function ListarUsuarios() {
     setRefreshing(false);
   }, [fetchUsers]);
 
+  const handleLogout = async () => {
+    Alert.alert("Sair", "Deseja realmente encerrar a sessão?", [
+      { text: "Cancelar", style: "cancel" },
+      {
+        text: "Sair",
+        style: "destructive",
+        onPress: async () => {
+          await AsyncStorage.removeItem(TOKEN_KEY);
+          navigation.reset({ index: 0, routes: [{ name: "Login" }] });
+        },
+      },
+    ]);
+  };
+
   /** ====== Ações ====== */
   const handleEdit = (user: User) => {
     navigation.navigate("EditarUsuario", { user });
@@ -194,19 +208,25 @@ export default function ListarUsuarios() {
 
   return (
     <SafeAreaView style={styles.screen} edges={["top"]}>
-      {/* AppBar no padrão de Área do Professor */}
       <View style={styles.appbar}>
-        <Pressable style={styles.backBtn} onPress={() => navigation.goBack()}>
-          <MaterialIcons
-            name="arrow-back"
-            size={24}
-            color={PALETTE.primaryDark}
-          />
-        </Pressable>
         <View style={{ flex: 1 }}>
           <Text style={styles.appbarTitle}>Usuários</Text>
           <View style={styles.appbarAccent} />
         </View>
+        {/* Botão de sair */}
+        <Pressable style={styles.logoutBtn} onPress={handleLogout}>
+          <MaterialIcons name="logout" size={24} color={PALETTE.danger} />
+        </Pressable>
+      </View>
+
+      <View style={styles.tabMenu}>
+        <Pressable style={styles.tabBtn} onPress={() => navigation.navigate("Admin")}>
+          <Text style={styles.tabText}>Posts</Text>
+        </Pressable>
+
+        <Pressable style={[styles.tabBtn, styles.tabBtnActive]} onPress={() => {}}>
+          <Text style={[styles.tabText, styles.tabTextActive]}>Usuários</Text>
+        </Pressable>
       </View>
 
       {loading ? (
@@ -271,6 +291,14 @@ const styles = StyleSheet.create({
     padding: 4,
     borderRadius: 999,
   },
+  logoutBtn: {
+    marginLeft: "auto",
+    padding: 6,
+    borderRadius: 8,
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: PALETTE.border,
+  },
   appbarTitle: {
     color: PALETTE.primaryDark,
     fontWeight: "900",
@@ -284,6 +312,36 @@ const styles = StyleSheet.create({
     backgroundColor: PALETTE.primary,
     borderRadius: 999,
     marginTop: 4,
+  },
+
+  /* Menu de abas */
+  tabMenu: {
+    flexDirection: "row",
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    backgroundColor: "#fff",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: PALETTE.border,
+    gap: 8,
+  },
+  tabBtn: {
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: PALETTE.border,
+    backgroundColor: "#fff",
+  },
+  tabBtnActive: {
+    backgroundColor: PALETTE.primary,
+    borderColor: PALETTE.primary,
+  },
+  tabText: {
+    color: PALETTE.ink,
+    fontWeight: "700",
+  },
+  tabTextActive: {
+    color: "#fff",
   },
 
   listContent: {

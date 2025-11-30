@@ -117,7 +117,7 @@ export default function CadastrarPost() {
         autor: autor.trim() || undefined,
       });
       Alert.alert("Sucesso", "Post cadastrado com sucesso!");
-      navigation.goBack(); // Admin/Área do Professor recarrega ao focar
+      navigation.goBack();
     } catch (e: any) {
       setError(e?.message ?? "Falha ao cadastrar o post.");
     } finally {

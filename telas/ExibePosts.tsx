@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
   appbar: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     backgroundColor: PALETTE.bgLight,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     marginTop: 4,
   },
-  logoutBtn: { padding: 6 },
+  logoutBtn: { padding: 6, marginLeft: "auto" },
 
   menu: {
     flexDirection: "row",

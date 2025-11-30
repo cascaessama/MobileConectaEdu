@@ -227,12 +227,6 @@ export default function Admin() {
     <SafeAreaView style={styles.screen} edges={["top"]}>
       {/* AppBar */}
       <View style={styles.appbar}>
-        <Image
-          source={{
-            uri: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-          }}
-          style={styles.logo}
-        />
         <View style={{ flex: 1 }}>
           <Text style={styles.appbarTitle}>Área do Professor</Text>
           <View style={styles.appbarAccent} />
@@ -309,7 +303,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: PALETTE.border,
   },
-  logo: { width: 28, height: 28, marginRight: 8 },
+  
   appbarTitle: {
     color: PALETTE.primaryDark,
     fontWeight: "900",

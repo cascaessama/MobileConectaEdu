@@ -123,7 +123,6 @@ export default function CadastrarUsuario() {
 
   return (
     <SafeAreaView style={styles.screen} edges={["top"]}>
-      {/* AppBar padrão Área do Professor */}
       <View style={styles.appbar}>
         <Pressable
           style={styles.backBtn}

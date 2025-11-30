@@ -72,12 +72,6 @@ export default function LerPost() {
     <SafeAreaView style={styles.screen} edges={["top"]}>
       {/* AppBar */}
       <View style={styles.appbar}>
-        <Pressable
-          onPress={() => navigation.goBack()}
-          style={styles.backTouchable}
-        >
-          <Text style={styles.backText}>◀</Text>
-        </Pressable>
         <Image
           source={{
             uri: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
@@ -135,15 +129,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: PALETTE.border,
   },
-  backTouchable: {
-    paddingRight: 8,
-    paddingVertical: 4,
-  },
-  backText: {
-    fontSize: 18,
-    color: PALETTE.primaryDark,
-    fontWeight: "700",
-  },
+  
   logo: { width: 26, height: 26, marginHorizontal: 6 },
   appbarTitle: {
     color: PALETTE.primaryDark,
