@@ -86,7 +86,7 @@ export default function LerPost() {
         />
         <View style={{ flex: 1 }}>
           <Text style={styles.appbarTitle}>Exibição de Post</Text>
-          <View style={styles.appbarAccent} />
+
         </View>
       </View>
 
@@ -96,9 +96,7 @@ export default function LerPost() {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.card}>
-          <View style={styles.badge}>
-            <Text style={styles.badgeText}>Post</Text>
-          </View>
+
 
           <Text style={styles.title}>{post.titulo || "Sem título"}</Text>
 
@@ -154,13 +152,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.6,
     textTransform: "uppercase",
   },
-  appbarAccent: {
-    width: 160,
-    height: 3,
-    backgroundColor: PALETTE.primary,
-    borderRadius: 999,
-    marginTop: 4,
-  },
+  
 
   /* Conteúdo */
   contentContainer: {
@@ -181,15 +173,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
 
-  badge: {
-    alignSelf: "flex-start",
-    backgroundColor: PALETTE.primary,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 999,
-    marginBottom: 10,
-  },
-  badgeText: { color: "#fff", fontWeight: "700", fontSize: 12 },
+  
 
   title: {
     fontSize: 22,

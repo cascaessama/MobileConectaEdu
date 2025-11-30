@@ -175,9 +175,6 @@ export default function ExibePosts() {
           <Text style={styles.content} numberOfLines={isOpen ? 0 : 4}>
             {item.conteudo?.trim() || "Sem conteúdo."}
           </Text>
-          <Text style={styles.more}>
-            {isOpen ? "Ver menos ▲" : "Ver mais ▼"}
-          </Text>
         </Pressable>
       );
     },
@@ -211,7 +208,6 @@ export default function ExibePosts() {
         />
         <View style={{ flex: 1 }}>
           <Text style={styles.appbarTitle}>Área do Aluno</Text>
-          <View style={styles.appbarAccent} />
         </View>
 
         <Pressable style={styles.logoutBtn} onPress={handleLogout}>
@@ -219,15 +215,7 @@ export default function ExibePosts() {
         </Pressable>
       </View>
 
-      {/* Menu (somente Posts agora) */}
-      <View style={styles.menu}>
-        <Pressable
-          style={[styles.menuBtn, styles.menuBtnActive]}
-          onPress={() => navigation.navigate("ExibePosts")}
-        >
-          <Text style={[styles.menuText, styles.menuTextActive]}>Posts</Text>
-        </Pressable>
-      </View>
+      {/* Menu removido conforme solicitação */}
 
       {/* Campo de busca */}
       <View style={styles.searchWrapper}>
