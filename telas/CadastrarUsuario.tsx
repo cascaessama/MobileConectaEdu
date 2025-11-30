@@ -132,7 +132,7 @@ export default function CadastrarUsuario() {
 
       <View style={styles.content}>
         <Text style={styles.hint}>
-          Preencha os dados abaixo para criar um novo usuário.
+          Preencha os campos abaixo e toque em “Salvar”.
         </Text>
 
         <View style={styles.formGroup}>

@@ -60,7 +60,7 @@ export default function EditarUsuario() {
   );
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [password, setPassword] = useState(""); // nova senha opcional
+  const [password, setPassword] = useState("");
 
   async function handleSave() {
     setError(null);
@@ -131,6 +131,7 @@ export default function EditarUsuario() {
       </View>
 
       <View style={styles.container}>
+        <Text style={styles.hint}>Altere os dados desejados e toque em "Salvar".</Text>
         <View style={styles.card}>
 
           <Text style={styles.label}>Usuário</Text>
@@ -147,7 +148,7 @@ export default function EditarUsuario() {
           <Text style={styles.label}>Nova senha</Text>
           <TextInput
             style={styles.input}
-            placeholder="Nova senha (Alteração opcional)"
+            placeholder="Manter senha atual"
             placeholderTextColor={PALETTE.inkMuted}
             value={password}
             onChangeText={setPassword}
@@ -245,6 +246,11 @@ const styles = StyleSheet.create({
 
   container: {
     padding: 16,
+  },
+  hint: {
+    fontSize: 13,
+    color: PALETTE.inkMuted,
+    marginBottom: 12,
   },
   card: {
     backgroundColor: PALETTE.card,

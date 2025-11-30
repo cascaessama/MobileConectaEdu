@@ -113,7 +113,7 @@ export default function Editar() {
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
         <View style={styles.card}>
           <Text style={styles.subtitle}>
-            Atualize os campos e toque em “Salvar”.
+            Altere os dados desejados e toque em "Salvar".
           </Text>
 
           <Text style={styles.label}>Título</Text>
@@ -128,7 +128,7 @@ export default function Editar() {
           <Text style={styles.label}>Autor</Text>
           <TextInput
             style={styles.input}
-            placeholder="Nome do autor (opcional)"
+            placeholder="Nome do autor"
             placeholderTextColor={PALETTE.inkMuted}
             value={autor}
             onChangeText={setAutor}
