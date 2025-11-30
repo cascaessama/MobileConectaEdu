@@ -105,8 +105,8 @@ export default function CadastrarPost() {
   async function handleSubmit() {
     setError(null);
 
-    if (!titulo.trim() || !conteudo.trim()) {
-      setError("Título e conteúdo são obrigatórios.");
+    if (!titulo.trim() || !conteudo.trim() || !autor.trim()) {
+      setError("Preencha título, conteúdo e nome do autor.");
       return;
     }
 
@@ -115,7 +115,7 @@ export default function CadastrarPost() {
       await createPostLocal({
         titulo: titulo.trim(),
         conteudo: conteudo.trim(),
-        autor: autor.trim() || undefined,
+        autor: autor.trim(),
       });
       Alert.alert("Sucesso", "Post cadastrado com sucesso!");
       navigation.goBack();
@@ -161,7 +161,7 @@ export default function CadastrarPost() {
           <Text style={styles.label}>Autor</Text>
           <TextInput
             style={styles.input}
-            placeholder="Nome autor"
+            placeholder="Nome autor…"
             placeholderTextColor={PALETTE.inkMuted}
             value={autor}
             onChangeText={setAutor}

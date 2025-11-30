@@ -4,6 +4,7 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
+  TextInput,
   Pressable,
   StyleSheet,
   Text,
@@ -49,6 +50,7 @@ export default function Admin() {
   const [refreshing, setRefreshing] = useState(false);
   const [items, setItems] = useState<Post[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
 
   const load = useCallback(async () => {
     setError(null);
@@ -223,6 +225,17 @@ export default function Admin() {
     []
   );
 
+  const filteredItems = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return items;
+    return items.filter((post) => {
+      const titulo = post.titulo?.toLowerCase() ?? "";
+      const conteudo = post.conteudo?.toLowerCase() ?? "";
+      const autor = post.autor?.toLowerCase() ?? "";
+      return titulo.includes(q) || conteudo.includes(q) || autor.includes(q);
+    });
+  }, [items, search]);
+
   return (
     <SafeAreaView style={styles.screen} edges={["top"]}>
       {/* AppBar */}
@@ -252,6 +265,18 @@ export default function Admin() {
         </Pressable>
       </View>
 
+      {/* Campo de busca */}
+      <View style={styles.searchWrapper}>
+        <TextInput
+          value={search}
+          onChangeText={setSearch}
+          placeholder="Buscar por palavra-chave..."
+          placeholderTextColor={PALETTE.inkMuted}
+          style={styles.searchInput}
+          returnKeyType="search"
+        />
+      </View>
+
       {/* Conteúdo (Posts) */}
       {loading ? (
         <View style={styles.center}>
@@ -263,14 +288,14 @@ export default function Admin() {
           {!!error && <Text style={styles.error}>{error}</Text>}
 
           <FlatList
-            data={items}
+            data={filteredItems}
             keyExtractor={keyExtractor}
             renderItem={renderItem}
             refreshing={refreshing}
             onRefresh={onRefresh}
             contentContainerStyle={[
               styles.listContent,
-              items.length === 0 && { flex: 1, justifyContent: "center" },
+              filteredItems.length === 0 && { flex: 1, justifyContent: "center" },
             ]}
             ItemSeparatorComponent={() => <View style={styles.separator} />}
             ListEmptyComponent={Empty}
@@ -355,6 +380,25 @@ const styles = StyleSheet.create({
   },
   tabTextActive: {
     color: "#fff",
+  },
+
+  /* Busca */
+  searchWrapper: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    backgroundColor: "#fff",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: PALETTE.border,
+  },
+  searchInput: {
+    backgroundColor: PALETTE.bgScreen,
+    borderRadius: 999,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderWidth: 1,
+    borderColor: PALETTE.border,
+    fontSize: 14,
+    color: PALETTE.ink,
   },
 
   /* Lista de posts */
