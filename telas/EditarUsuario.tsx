@@ -60,6 +60,7 @@ export default function EditarUsuario() {
   );
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [password, setPassword] = useState(""); // nova senha opcional
 
   async function handleSave() {
     setError(null);
@@ -85,13 +86,16 @@ export default function EditarUsuario() {
         return;
       }
 
+      const payload: any = { username: username.trim(), userType };
+      if (password.trim()) payload.password = password.trim();
+
       const res = await fetch(`${API_URL}/users/${userId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ username: username.trim(), userType }),
+        body: JSON.stringify(payload),
       });
 
       const raw = await res.text();
@@ -138,6 +142,17 @@ export default function EditarUsuario() {
             onChangeText={setUsername}
             autoCapitalize="none"
             autoCorrect={false}
+          />
+
+          <Text style={styles.label}>Nova senha</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Nova senha (Alteração opcional)"
+            placeholderTextColor={PALETTE.inkMuted}
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            autoCapitalize="none"
           />
 
           <Text style={styles.label}>Tipo de Usuário</Text>

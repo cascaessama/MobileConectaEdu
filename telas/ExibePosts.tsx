@@ -198,18 +198,12 @@ export default function ExibePosts() {
 
   return (
     <SafeAreaView style={styles.screen} edges={["top"]}>
-      {/* AppBar no padrão administrativo */}
+      {/* AppBar alinhado ao layout do Professor */}
       <View style={styles.appbar}>
-        <Image
-          source={{
-            uri: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-          }}
-          style={styles.logo}
-        />
         <View style={{ flex: 1 }}>
           <Text style={styles.appbarTitle}>Área do Aluno</Text>
+          <View style={styles.appbarAccent} />
         </View>
-
         <Pressable style={styles.logoutBtn} onPress={handleLogout}>
           <MaterialIcons name="logout" size={24} color={PALETTE.danger} />
         </Pressable>
@@ -286,7 +280,14 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     marginTop: 4,
   },
-  logoutBtn: { padding: 6, marginLeft: "auto" },
+  logoutBtn: {
+    marginLeft: "auto",
+    padding: 6,
+    borderRadius: 8,
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: PALETTE.border,
+  },
 
   menu: {
     flexDirection: "row",

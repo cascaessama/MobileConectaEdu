@@ -135,8 +135,10 @@ export default function Login({ navigation }: any) {
       } catch {}
 
       if (!res.ok) {
-        const msg =
-          data?.message || `Falha na autenticação (HTTP ${res.status})`;
+        let msg = data?.message || `Falha na autenticação (HTTP ${res.status})`;
+        if (/invalid credentials/i.test(msg)) {
+          msg = "Usuário ou senha incorretos.";
+        }
         throw new Error(msg);
       }
 
@@ -161,10 +163,13 @@ export default function Login({ navigation }: any) {
           : "ExibePosts"
       );
     } catch (err: any) {
-      const msg =
+      let msg =
         err?.name === "AbortError"
           ? "Tempo de conexão esgotado."
           : err?.message || "Erro de rede ao autenticar.";
+      if (/invalid credentials/i.test(msg)) {
+        msg = "Usuário ou senha incorretos.";
+      }
       setError(msg);
       Alert.alert("Erro", msg);
     } finally {
@@ -228,7 +233,18 @@ export default function Login({ navigation }: any) {
           textContentType="password"
         />
 
-        {error ? <Text style={styles.errorMsg}>{error}</Text> : null}
+        {error ? (
+          <Text
+            style={[
+              styles.errorMsg,
+              (/invalid credentials/i.test(error) || /usuário ou senha incorretos\./i.test(error)) && {
+                fontWeight: "700",
+              },
+            ]}
+          >
+            {error}
+          </Text>
+        ) : null}
 
         <Pressable
           style={[styles.button, submitting && { opacity: 0.7 }]}
