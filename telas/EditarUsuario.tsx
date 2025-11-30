@@ -120,13 +120,6 @@ export default function EditarUsuario() {
     <SafeAreaView style={styles.screen} edges={["top"]}>
       {/* AppBar */}
       <View style={styles.appbar}>
-        <Pressable style={styles.backBtn} onPress={() => navigation.goBack()}>
-          <MaterialIcons
-            name="arrow-back"
-            size={24}
-            color={PALETTE.primaryDark}
-          />
-        </Pressable>
         <View style={{ flex: 1 }}>
           <Text style={styles.appbarTitle}>Editar Usuário</Text>
           <View style={styles.appbarAccent} />
@@ -135,12 +128,8 @@ export default function EditarUsuario() {
 
       <View style={styles.container}>
         <View style={styles.card}>
-          <Text style={styles.label}>ID</Text>
-          <Text style={styles.readonlyBox} numberOfLines={1}>
-            {userId || "—"}
-          </Text>
 
-          <Text style={styles.label}>Username</Text>
+          <Text style={styles.label}>Usuário</Text>
           <TextInput
             style={styles.input}
             placeholder="ex.: joao.silva"
@@ -153,7 +142,7 @@ export default function EditarUsuario() {
 
           <Text style={styles.label}>Tipo de Usuário</Text>
           <View style={styles.typeRow}>
-            {(["admin", "teacher", "student"] as const).map((t) => {
+            {(["teacher", "student"] as const).map((t) => {
               const active = userType === t;
               return (
                 <Pressable
@@ -170,11 +159,7 @@ export default function EditarUsuario() {
                       active && styles.typeChipTextActive,
                     ]}
                   >
-                    {t === "admin"
-                      ? "Administrador"
-                      : t === "teacher"
-                      ? "Professor"
-                      : "Aluno"}
+                    {t === "teacher" ? "Professor" : "Aluno"}
                   </Text>
                 </Pressable>
               );
@@ -226,9 +211,7 @@ const styles = StyleSheet.create({
     borderBottomColor: PALETTE.border,
   },
   backBtn: {
-    marginRight: 8,
-    padding: 4,
-    borderRadius: 999,
+    // removido para padronizar com EditarPost (sem botão de voltar)
   },
   appbarTitle: {
     color: PALETTE.primaryDark,
@@ -267,14 +250,6 @@ const styles = StyleSheet.create({
 
   label: { fontWeight: "600", color: "#2b2b2b", marginBottom: 6, marginTop: 10 },
 
-  readonlyBox: {
-    borderWidth: 1,
-    borderColor: PALETTE.border,
-    backgroundColor: "#F7F9FF",
-    color: PALETTE.inkMuted,
-    borderRadius: 10,
-    padding: 12,
-  },
 
   input: {
     borderWidth: 1,

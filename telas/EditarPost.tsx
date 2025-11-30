@@ -113,7 +113,7 @@ export default function Editar() {
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
         <View style={styles.card}>
           <Text style={styles.subtitle}>
-            Atualize os campos e toque em “Salvar alterações”.
+            Atualize os campos e toque em “Salvar”.
           </Text>
 
           <Text style={styles.label}>Título</Text>
@@ -153,7 +153,7 @@ export default function Editar() {
             </Pressable>
 
             <Pressable style={[styles.btn, styles.btnPrimary, submitting && { opacity: 0.7 }]} onPress={handleSubmit} disabled={submitting}>
-              {submitting ? <ActivityIndicator color="#fff" /> : <Text style={styles.btnText}>Salvar alterações</Text>}
+              {submitting ? <ActivityIndicator color="#fff" /> : <Text style={styles.btnText}>Salvar</Text>}
             </Pressable>
           </View>
         </View>

@@ -270,7 +270,7 @@ export default function ListarUsuarios() {
         <TextInput
           value={search}
           onChangeText={setSearch}
-          placeholder="Buscar por nome ou tipo..."
+          placeholder="Buscar por palavra-chave..."
           placeholderTextColor={PALETTE.inkMuted}
           style={styles.searchInput}
           returnKeyType="search"

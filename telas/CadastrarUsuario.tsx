@@ -136,7 +136,7 @@ export default function CadastrarUsuario() {
         </Text>
 
         <View style={styles.formGroup}>
-          <Text style={styles.label}>Username</Text>
+          <Text style={styles.label}>Usuário</Text>
           <TextInput
             style={styles.input}
             value={username}
