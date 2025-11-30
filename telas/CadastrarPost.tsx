@@ -140,7 +140,7 @@ export default function CadastrarPost() {
             Preencha os campos abaixo e toque em “Salvar”.
           </Text>
 
-          <Text style={styles.label}>Título *</Text>
+          <Text style={styles.label}>Título</Text>
           <TextInput
             style={styles.input}
             placeholder="Um título bonito…"

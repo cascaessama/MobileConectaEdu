@@ -12,6 +12,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -99,7 +100,16 @@ export default function Editar() {
   }
 
   return (
-    <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+    <SafeAreaView style={styles.screen} edges={["top"]}>
+      {/* AppBar */}
+      <View style={styles.appbar}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.appbarTitle}>Editar Post</Text>
+          <View style={styles.appbarAccent} />
+        </View>
+      </View>
+
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
         <View style={styles.card}>
           <Text style={styles.title}>Editar Post</Text>
@@ -107,7 +117,7 @@ export default function Editar() {
             Atualize os campos e toque em “Salvar alterações”.
           </Text>
 
-          <Text style={styles.label}>Título *</Text>
+          <Text style={styles.label}>Título</Text>
           <TextInput
             style={styles.input}
             placeholder="Um título bonito…"
@@ -149,12 +159,36 @@ export default function Editar() {
           </View>
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: PALETTE.bgScreen },
+  appbar: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: PALETTE.bgLight,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: PALETTE.border,
+  },
+  appbarTitle: {
+    color: PALETTE.primaryDark,
+    fontWeight: "900",
+    fontSize: 22,
+    letterSpacing: 0.6,
+    textTransform: "uppercase",
+  },
+  appbarAccent: {
+    width: 140,
+    height: 3,
+    backgroundColor: PALETTE.primary,
+    borderRadius: 999,
+    marginTop: 4,
+  },
   container: { padding: 16 },
   card: {
     backgroundColor: PALETTE.card,

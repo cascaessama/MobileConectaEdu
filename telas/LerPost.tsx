@@ -72,15 +72,9 @@ export default function LerPost() {
     <SafeAreaView style={styles.screen} edges={["top"]}>
       {/* AppBar */}
       <View style={styles.appbar}>
-        <Image
-          source={{
-            uri: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-          }}
-          style={styles.logo}
-        />
         <View style={{ flex: 1 }}>
           <Text style={styles.appbarTitle}>Exibição de Post</Text>
-
+          <View style={styles.appbarAccent} />
         </View>
       </View>
 
@@ -124,19 +118,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: PALETTE.bgLight,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: PALETTE.border,
   },
-  
-  logo: { width: 26, height: 26, marginHorizontal: 6 },
   appbarTitle: {
     color: PALETTE.primaryDark,
     fontWeight: "900",
     fontSize: 22,
     letterSpacing: 0.6,
     textTransform: "uppercase",
+  },
+  appbarAccent: {
+    width: 140,
+    height: 3,
+    backgroundColor: PALETTE.primary,
+    borderRadius: 999,
+    marginTop: 4,
   },
   
 
