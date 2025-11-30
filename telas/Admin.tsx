@@ -153,6 +153,55 @@ export default function Admin() {
   const renderItem = useCallback(
     ({ item }: { item: Post }) => {
       const id = item._id || item.id || "";
+      const handleDelete = async () => {
+        if (!id) {
+          Alert.alert("Erro", "Post sem identificador.");
+          return;
+        }
+
+        Alert.alert(
+          "Excluir post",
+          `Deseja realmente excluir o post "${item.titulo || "Sem título"}"?`,
+          [
+            { text: "Cancelar", style: "cancel" },
+            {
+              text: "Excluir",
+              style: "destructive",
+              onPress: async () => {
+                try {
+                  const token = await AsyncStorage.getItem(TOKEN_KEY);
+                  if (!token) {
+                    Alert.alert("Sessão expirada", "Faça login novamente.");
+                    return;
+                  }
+
+                  const res = await fetch(`${API_URL}/portal/${id}`, {
+                    method: "DELETE",
+                    headers: { Authorization: `Bearer ${token}` },
+                  });
+
+                  if (!res.ok) {
+                    let msg = "Falha ao excluir post.";
+                    try {
+                      const data = await res.json();
+                      if (data?.message) msg = data.message;
+                    } catch {
+                      const t = await res.text();
+                      if (t) msg = t;
+                    }
+                    throw new Error(msg);
+                  }
+
+                  // Remove do estado local, como em ListarUsuarios
+                  setItems((prev) => prev.filter((p) => (p._id || p.id) !== id));
+                } catch (e: any) {
+                  Alert.alert("Erro", e?.message ?? "Erro ao excluir post.");
+                }
+              },
+            },
+          ]
+        );
+      };
       return (
         <Pressable
           style={styles.card}
@@ -175,12 +224,7 @@ export default function Admin() {
                 />
               </Pressable>
               <Pressable
-                onPress={() =>
-                  navigation.navigate("ExcluirPost", {
-                    id,
-                    titulo: item.titulo || "Sem título",
-                  })
-                }
+                onPress={handleDelete}
                 style={styles.iconBtn}
               >
                 <MaterialIcons

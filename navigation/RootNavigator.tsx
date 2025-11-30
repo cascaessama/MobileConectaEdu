@@ -6,7 +6,6 @@ import LerPost from "../telas/LerPost";
 import Login from "../telas/Login";
 import CadastrarPost from "../telas/CadastrarPost";
 import EditarPost from "../telas/EditarPost";
-import ExcluirPost from "../telas/ExcluirPost";
 import Admin from "../telas/Admin";
 import Aluno from "../telas/Aluno";
 import ListarUsuarios from "../telas/ListarUsuarios";
@@ -22,7 +21,6 @@ export type RootStackParamList = {
   Login:undefined;
   CadastrarPost:undefined;
   EditarPost:undefined;
-  ExcluirPost:undefined;
   ListarUsuarios: undefined;
   CadastrarUsuario:undefined;
   EditarUsuario:undefined;
@@ -45,9 +43,6 @@ export default function RootNavigator() {
 
       
       <Stack.Screen name="EditarPost" component={EditarPost} />
-
-      
-      <Stack.Screen name="ExcluirPost" component={ExcluirPost} />
 
 
       <Stack.Screen name="LerPost" component={LerPost}  options={{ title: "LerPost" }}/>
