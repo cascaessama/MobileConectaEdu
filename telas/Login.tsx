@@ -193,7 +193,8 @@ export default function Login({ navigation }: any) {
   return (
     <KeyboardAvoidingView
       style={styles.screen}
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      behavior={Platform.OS === "ios" ? "padding" : "padding"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
     >
       <View style={styles.header}>
         <Image
@@ -276,8 +277,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: PALETTE.bgScreen,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     paddingHorizontal: 20,
+    paddingTop: 40,
   },
   header: { alignItems: "center", marginBottom: 32 },
   logo: { width: 72, height: 72, marginBottom: 10 },
