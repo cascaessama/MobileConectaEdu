@@ -112,7 +112,6 @@ export default function Editar() {
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
         <View style={styles.card}>
-          <Text style={styles.title}>Editar Post</Text>
           <Text style={styles.subtitle}>
             Atualize os campos e toque em “Salvar alterações”.
           </Text>
